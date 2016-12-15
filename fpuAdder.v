@@ -30,7 +30,7 @@ module fpuAdder
     // diff and slt of exponents
     wire [10:0] expDiff;
     wire expSlt, expOvfl;
-    expDiff expDiff0(expDiff, expSlt, ovfl, Aexp, Bexp);
+    expDiff expDiff0(expDiff, expSlt, expOvfl, Aexp, Bexp);
 
     // muxes to select corresponding frac, exponent, and signs based on exponent slt
     wire [52:0] smallerFrac;
@@ -54,8 +54,8 @@ module fpuAdder
 
     // fraction add/sub
     wire [52:0] adderOut;
-    wire cout;
-    adder fracAdder(adderOut, esign, cout, eop, largerFrac, smallerFracShifted);
+    wire ovfl;
+    adder fracAdder(adderOut, esign, ovfl, eop, largerFrac, smallerFracShifted);
 
     // always @(adderOut) begin
     //     $display("%b", adderOut);
@@ -76,14 +76,14 @@ module fpuAdder
     zeroCounter zeroCounter0(numZeroes, {adderOut,{11{1'b1}}});
 
     // normalize fraction
-    wire [52:0] coutShift, zeroesShift, Zfrac;
-    rightShift53bit rightShift(coutShift, 11'b1, adderOut);
+    wire [52:0] ovflShift, zeroesShift, Zfrac;
+    rightShift53bit rightShift(ovflShift, 11'b1, adderOut);
     leftShift53bit leftShift(zeroesShift, {{5{1'b0}},numZeroes}, adderOut);
-    mux53bit normalizeFrac(Zfrac, cout, zeroesShift, coutShift);
+    mux53bit normalizeFrac(Zfrac, ovfl, zeroesShift, ovflShift);
 
     // normalize exponent
     wire [10:0] Zexp;
-    mux11bit normalizeExp(Zexp, cout, largerExp-{{5{1'b0}},numZeroes}, largerExp+11'b1);
+    mux11bit normalizeExp(Zexp, ovfl, largerExp-{{5{1'b0}},numZeroes}, largerExp+11'b1);
 
     assign Z = {Zsign, Zexp, Zfrac[51:0]};
 
