@@ -1,7 +1,9 @@
 # CompArch Final Project Writeup - FPU Add/Sub
 
 ## Overview
-I implemented an double precision floating point adder/subtractor using Verilog. The adder/subtractor is one of the most difficult portions of an FPU to implement, as keeping track of the exponent and sign of the output is quite confusing. I attempted to implement this as structurally as possible, but ran out of time before making it fully structural. However, the structure of the implementation along with the testing suite would make it fairly easy to swap out behavioral components for structural components. For example, the left and right shifters in the block diagram could be swapped out with a barrel shifter implementation.
+I implemented a double precision floating point adder/subtractor using Verilog. The adder/subtractor is one of the most difficult portions of an FPU to implement, as keeping track of the exponent and sign of the output is quite confusing. 
+
+I attempted to implement this as structurally as possible, but ran out of time before making it fully structural. However, the structure of the implementation along with the testing suite would make it fairly easy to swap out behavioral components for structural components. For example, the left and right shifters in the block diagram could be swapped out with a barrel shifter implementation.
 
 Additionally, I did not implement rounding modes or deal with overflow during exponent difference calculation. The focus of this project was to understand and implement basic floating point arithmetic.
 
