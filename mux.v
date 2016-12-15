@@ -1,26 +1,26 @@
 // Multiplexors
 
-module mux24bit
+module mux53bit
 (
-    output [23:0] out,
+    output [52:0] out,
     input sel,
-    input [23:0] A,
-    input [23:0] B
+    input [52:0] A,
+    input [52:0] B
 );
     wire sel;
-    wire signed [23:0] A, B;
+    wire signed [52:0] A, B;
     assign out = sel ? B : A;
 endmodule
 
-module mux8bit
+module mux11bit
 (
-    output [7:0] out,
+    output [10:0] out,
     input sel,
-    input [7:0] A,
-    input [7:0] B
+    input [10:0] A,
+    input [10:0] B
 );
     wire sel;
-    wire signed [7:0] A, B;
+    wire signed [10:0] A, B;
     assign out = sel ? B : A;
     // assign out = ~A+1;
 endmodule

@@ -1,23 +1,23 @@
-// 25-bit Adder/Subtractor
+// 52-bit Adder/Subtractor
 // op: 0=>add, 1=>sub
 // `include "mux.v"
 
 module adder
 (
-    output [23:0] res,
+    output [52:0] res,
     output sign,
     output cout,
     input op,
-    input [23:0] A,
-    input [23:0] B
+    input [52:0] A,
+    input [52:0] B
 );
     wire op;
-    wire [23:0] A, B;
+    wire [52:0] A, B;
 
-    reg signed [24:0] signedRes;
+    reg signed [53:0] signedRes;
     reg signedCout;
     
-    assign sign = signedRes[24] & ~cout;
+    assign sign = signedRes[53] & ~cout;
 
     always @(op or A or B) begin
         if (!op) begin
@@ -28,7 +28,7 @@ module adder
         // $display("%b",signedRes);
     end
 
-    xor (cout, signedRes[24], signedCout);
-    mux24bit mux(res, sign, signedRes[23:0], ~signedRes[23:0]+24'b1);
+    xor (cout, signedRes[53], signedCout);
+    mux53bit mux(res, sign, signedRes[52:0], ~signedRes[52:0]+53'b1);
 
 endmodule

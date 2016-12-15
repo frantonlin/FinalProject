@@ -1,0 +1,103 @@
+[*]
+[*] GTKWave Analyzer v3.3.76 (w)1999-2016 BSI
+[*] Thu Dec 15 04:03:31 2016
+[*]
+[dumpfile] "/Users/franton/Documents/CompArch/FinalProject/fpuAdder_all.vcd"
+[dumpfile_mtime] "Thu Dec 15 04:02:49 2016"
+[dumpfile_size] 6231
+[savefile] "/Users/franton/Documents/CompArch/FinalProject/pretty.gtkw"
+[timestart] 0
+[size] 1280 778
+[pos] -1 -1
+*0.000000 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
+[treeopen] testFpuAdder.
+[treeopen] testFpuAdder.fpuAdder0.
+[sst_width] 193
+[signals_width] 308
+[sst_expanded] 1
+[sst_vpaned_height] 231
+@200
+-Inputs
+@40020
+testFpuAdder.fpuAdder0.A[63:0]
+testFpuAdder.fpuAdder0.B[63:0]
+@200
+-
+-Exponent Compare
+@24
+testFpuAdder.fpuAdder0.expDiff[10:0]
+@28
+testFpuAdder.fpuAdder0.expSlt
+testFpuAdder.fpuAdder0.smallerSign
+testFpuAdder.fpuAdder0.smallerFrac[52:0]
+testFpuAdder.fpuAdder0.smallerFracShifted[52:0]
+testFpuAdder.fpuAdder0.largerSign
+@24
+testFpuAdder.fpuAdder0.largerExp[10:0]
+@c00028
+testFpuAdder.fpuAdder0.largerFrac[52:0]
+@28
+(0)testFpuAdder.fpuAdder0.largerFrac[52:0]
+(1)testFpuAdder.fpuAdder0.largerFrac[52:0]
+(2)testFpuAdder.fpuAdder0.largerFrac[52:0]
+(3)testFpuAdder.fpuAdder0.largerFrac[52:0]
+(4)testFpuAdder.fpuAdder0.largerFrac[52:0]
+(5)testFpuAdder.fpuAdder0.largerFrac[52:0]
+(6)testFpuAdder.fpuAdder0.largerFrac[52:0]
+(7)testFpuAdder.fpuAdder0.largerFrac[52:0]
+(8)testFpuAdder.fpuAdder0.largerFrac[52:0]
+(9)testFpuAdder.fpuAdder0.largerFrac[52:0]
+(10)testFpuAdder.fpuAdder0.largerFrac[52:0]
+(11)testFpuAdder.fpuAdder0.largerFrac[52:0]
+(12)testFpuAdder.fpuAdder0.largerFrac[52:0]
+(13)testFpuAdder.fpuAdder0.largerFrac[52:0]
+(14)testFpuAdder.fpuAdder0.largerFrac[52:0]
+(15)testFpuAdder.fpuAdder0.largerFrac[52:0]
+(16)testFpuAdder.fpuAdder0.largerFrac[52:0]
+(17)testFpuAdder.fpuAdder0.largerFrac[52:0]
+(18)testFpuAdder.fpuAdder0.largerFrac[52:0]
+(19)testFpuAdder.fpuAdder0.largerFrac[52:0]
+(20)testFpuAdder.fpuAdder0.largerFrac[52:0]
+(21)testFpuAdder.fpuAdder0.largerFrac[52:0]
+(22)testFpuAdder.fpuAdder0.largerFrac[52:0]
+(23)testFpuAdder.fpuAdder0.largerFrac[52:0]
+(24)testFpuAdder.fpuAdder0.largerFrac[52:0]
+(25)testFpuAdder.fpuAdder0.largerFrac[52:0]
+(26)testFpuAdder.fpuAdder0.largerFrac[52:0]
+(27)testFpuAdder.fpuAdder0.largerFrac[52:0]
+(28)testFpuAdder.fpuAdder0.largerFrac[52:0]
+(29)testFpuAdder.fpuAdder0.largerFrac[52:0]
+(30)testFpuAdder.fpuAdder0.largerFrac[52:0]
+(31)testFpuAdder.fpuAdder0.largerFrac[52:0]
+(32)testFpuAdder.fpuAdder0.largerFrac[52:0]
+(33)testFpuAdder.fpuAdder0.largerFrac[52:0]
+(34)testFpuAdder.fpuAdder0.largerFrac[52:0]
+(35)testFpuAdder.fpuAdder0.largerFrac[52:0]
+(36)testFpuAdder.fpuAdder0.largerFrac[52:0]
+(37)testFpuAdder.fpuAdder0.largerFrac[52:0]
+(38)testFpuAdder.fpuAdder0.largerFrac[52:0]
+(39)testFpuAdder.fpuAdder0.largerFrac[52:0]
+(40)testFpuAdder.fpuAdder0.largerFrac[52:0]
+(41)testFpuAdder.fpuAdder0.largerFrac[52:0]
+(42)testFpuAdder.fpuAdder0.largerFrac[52:0]
+(43)testFpuAdder.fpuAdder0.largerFrac[52:0]
+(44)testFpuAdder.fpuAdder0.largerFrac[52:0]
+(45)testFpuAdder.fpuAdder0.largerFrac[52:0]
+(46)testFpuAdder.fpuAdder0.largerFrac[52:0]
+(47)testFpuAdder.fpuAdder0.largerFrac[52:0]
+(48)testFpuAdder.fpuAdder0.largerFrac[52:0]
+(49)testFpuAdder.fpuAdder0.largerFrac[52:0]
+(50)testFpuAdder.fpuAdder0.largerFrac[52:0]
+(51)testFpuAdder.fpuAdder0.largerFrac[52:0]
+(52)testFpuAdder.fpuAdder0.largerFrac[52:0]
+@1401200
+-group_end
+@200
+-
+-Fraction Adder
+@28
+testFpuAdder.fpuAdder0.fracAdder.A[52:0]
+testFpuAdder.fpuAdder0.fracAdder.B[52:0]
+testFpuAdder.fpuAdder0.fracAdder.res[52:0]
+[pattern_trace] 1
+[pattern_trace] 0

@@ -3,19 +3,23 @@
 
 module testShift();
     
-    reg signed [23:0] in;
-    reg signed [7:0] shiftAmt;
-    wire signed [23:0] rightRes, leftRes;
+    reg signed [52:0] in;
+    reg signed [10:0] shiftAmt;
+    wire signed [52:0] rightRes, leftRes;
 
-    rightShift24bit shift0(rightRes, shiftAmt, in);
-    leftShift24bit shift1(leftRes, shiftAmt, in);
+    rightShift53bit shift0(rightRes, shiftAmt, in);
+    leftShift53bit shift1(leftRes, shiftAmt, in);
 
     initial begin
-        $display("in                        shiftAmt | rightRes                  leftRes");
-        in=24'd654321;shiftAmt=8'd3; #1000;
-        $display("%b  %-3d      | %b  %b", in, shiftAmt, rightRes, leftRes);
-        in=-24'd654321;shiftAmt=8'd7; #1000;
-        $display("%b  %-3d      | %b  %b", in, shiftAmt, rightRes, leftRes);
+        $display("in                                                     shiftAmt");
+        in=53'd654321;shiftAmt=11'd3; #1000;
+        $display("%b  %-3d", in, shiftAmt);
+        $display("%b", rightRes);
+        $display("%b", leftRes);
+        in=-53'd654321;shiftAmt=11'd7; #1000;
+        $display("%b  %-3d", in, shiftAmt);
+        $display("%b", rightRes);
+        $display("%b", leftRes);
     end
 
 endmodule

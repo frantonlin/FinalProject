@@ -2,9 +2,11 @@
 `include "fpuAdder.v"
 
 module testFpuAdder();
-    wire [31:0] Z;
+    wire [63:0] Z;
     reg op;
-    reg [31:0] A, B;
+    reg [63:0] A, B;
+
+    real Afrac;
 
     fpuAdder fpuAdder0(Z, op, A, B);
 
@@ -13,28 +15,105 @@ module testFpuAdder();
         $dumpvars();
 
         $display("A                     op    B                    =  Z");
-        A=32'b01000000000000000000000000000000;
-        B=32'b01000000010000000000000000000000;
-        op=0;#1000;
-        $display("%s * 2^%-1d * %f  %s  %s * 2^%-1d * %f  =  %s * 2^%-1d * %f    %b", A[31]?"-1":"+1",$signed(A[30:23]-127),$itor({1'b1,A[22:0]})*(2.0**-23.0), op?"MINUS":"PLUS", B[31]?"-1":"+1",$signed(B[30:23]-127),$itor({1'b1,B[22:0]})*(2.0**-23.0), Z[31]?"-1":"+1",$signed(Z[30:23]-127),$itor({1'b1,Z[22:0]})*(2.0**-23.0), Z);
-        $display("%f %s %f = %f", $itor((A[31]?-1:1)*2**(A[30:23]-127)*{1'b1,A[22:0]})*(2.0**-23.0),  op?"-":"+", $itor((B[31]?-1:1)*2**(B[30:23]-127)*{1'b1,B[22:0]})*(2.0**-23.0), $itor((Z[31]?-1:1)*2**(Z[30:23]-127)*{1'b1,Z[22:0]})*(2.0**-23.0));
-        $display();
 
-        A=32'b11000000000000000000000000000000;
-        B=32'b11000000010000000000000000000000;
+        // Add same sign positive
+        A=$realtobits(3);
+        B=$realtobits(4);
+        op=0;#1000;
+        // $display();
+        // $display("%s * 2^%-1d * %f  %s  %s * 2^%-1d * %f  =  %s * 2^%-1d * %f    %b", A[63]?"-1":"+1",$signed(A[62:52]-1023),$itor({1'b1,A[51:22]})*(2.0**-30.0), op?"MINUS":"PLUS", B[63]?"-1":"+1",$signed(B[62:52]-1023),$itor({1'b1,B[51:22]})*(2.0**-30.0), Z[63]?"-1":"+1",$signed(Z[62:52]-1023),$itor({1'b1,Z[51:22]})*(2.0**-30.0), Z);
+        $display("%f %s %f = %f", $bitstoreal(A), op?"-":"+", $bitstoreal(B), $bitstoreal(Z));
+
+        // Add same sign negative
+        A=$realtobits(-3);
+        B=$realtobits(-4);
+        op=0;#1000;
+        // $display();
+        // $display("%s * 2^%-1d * %f  %s  %s * 2^%-1d * %f  =  %s * 2^%-1d * %f    %b", A[63]?"-1":"+1",$signed(A[62:52]-1023),$itor({1'b1,A[51:22]})*(2.0**-30.0), op?"MINUS":"PLUS", B[63]?"-1":"+1",$signed(B[62:52]-1023),$itor({1'b1,B[51:22]})*(2.0**-30.0), Z[63]?"-1":"+1",$signed(Z[62:52]-1023),$itor({1'b1,Z[51:22]})*(2.0**-30.0), Z);
+        $display("%f %s %f = %f", $bitstoreal(A), op?"-":"+", $bitstoreal(B), $bitstoreal(Z));
+
+        // Add negative first, result positive
+        A=$realtobits(-3);
+        B=$realtobits(4);
+        op=0;#1000;
+        // $display();
+        // $display("%s * 2^%-1d * %f  %s  %s * 2^%-1d * %f  =  %s * 2^%-1d * %f    %b", A[63]?"-1":"+1",$signed(A[62:52]-1023),$itor({1'b1,A[51:22]})*(2.0**-30.0), op?"MINUS":"PLUS", B[63]?"-1":"+1",$signed(B[62:52]-1023),$itor({1'b1,B[51:22]})*(2.0**-30.0), Z[63]?"-1":"+1",$signed(Z[62:52]-1023),$itor({1'b1,Z[51:22]})*(2.0**-30.0), Z);
+        $display("%f %s %f = %f", $bitstoreal(A), op?"-":"+", $bitstoreal(B), $bitstoreal(Z));
+
+        // Add negative first, result negative
+        A=$realtobits(-4);
+        B=$realtobits(3);
+        op=0;#1000;
+        // $display();
+        // $display("%s * 2^%-1d * %f  %s  %s * 2^%-1d * %f  =  %s * 2^%-1d * %f    %b", A[63]?"-1":"+1",$signed(A[62:52]-1023),$itor({1'b1,A[51:22]})*(2.0**-30.0), op?"MINUS":"PLUS", B[63]?"-1":"+1",$signed(B[62:52]-1023),$itor({1'b1,B[51:22]})*(2.0**-30.0), Z[63]?"-1":"+1",$signed(Z[62:52]-1023),$itor({1'b1,Z[51:22]})*(2.0**-30.0), Z);
+        $display("%f %s %f = %f", $bitstoreal(A), op?"-":"+", $bitstoreal(B), $bitstoreal(Z));
+
+        // Add negative second, result positive
+        A=$realtobits(4);
+        B=$realtobits(-3);
+        op=0;#1000;
+        // $display();
+        // $display("%s * 2^%-1d * %f  %s  %s * 2^%-1d * %f  =  %s * 2^%-1d * %f    %b", A[63]?"-1":"+1",$signed(A[62:52]-1023),$itor({1'b1,A[51:22]})*(2.0**-30.0), op?"MINUS":"PLUS", B[63]?"-1":"+1",$signed(B[62:52]-1023),$itor({1'b1,B[51:22]})*(2.0**-30.0), Z[63]?"-1":"+1",$signed(Z[62:52]-1023),$itor({1'b1,Z[51:22]})*(2.0**-30.0), Z);
+        $display("%f %s %f = %f", $bitstoreal(A), op?"-":"+", $bitstoreal(B), $bitstoreal(Z));
+
+        // Add negative second, result negative
+        A=$realtobits(3);
+        B=$realtobits(-4);
+        op=0;#1000;
+        // $display();
+        // $display("%s * 2^%-1d * %f  %s  %s * 2^%-1d * %f  =  %s * 2^%-1d * %f    %b", A[63]?"-1":"+1",$signed(A[62:52]-1023),$itor({1'b1,A[51:22]})*(2.0**-30.0), op?"MINUS":"PLUS", B[63]?"-1":"+1",$signed(B[62:52]-1023),$itor({1'b1,B[51:22]})*(2.0**-30.0), Z[63]?"-1":"+1",$signed(Z[62:52]-1023),$itor({1'b1,Z[51:22]})*(2.0**-30.0), Z);
+        $display("%f %s %f = %f", $bitstoreal(A), op?"-":"+", $bitstoreal(B), $bitstoreal(Z));
+
+
+        // Sub same sign positive
+        A=$realtobits(3);
+        B=$realtobits(4);
         op=1;#1000;
-        $display("%s * 2^%-1d * %f  %s  %s * 2^%-1d * %f  =  %s * 2^%-1d * %f    %b", A[31]?"-1":"+1",$signed(A[30:23]-127),$itor({1'b1,A[22:0]})*(2.0**-23.0), op?"MINUS":"PLUS", B[31]?"-1":"+1",$signed(B[30:23]-127),$itor({1'b1,B[22:0]})*(2.0**-23.0), Z[31]?"-1":"+1",$signed(Z[30:23]-127),$itor({1'b1,Z[22:0]})*(2.0**-23.0), Z);
-        $display("%f %s %f = %f", $itor((A[31]?-1:1)*2**(A[30:23]-127)*{1'b1,A[22:0]})*(2.0**-23.0),  op?"-":"+", $itor((B[31]?-1:1)*2**(B[30:23]-127)*{1'b1,B[22:0]})*(2.0**-23.0), $itor((Z[31]?-1:1)*2**(Z[30:23]-127)*{1'b1,Z[22:0]})*(2.0**-23.0));
-        $display();
+        // $display();
+        // $display("%s * 2^%-1d * %f  %s  %s * 2^%-1d * %f  =  %s * 2^%-1d * %f    %b", A[63]?"-1":"+1",$signed(A[62:52]-1023),$itor({1'b1,A[51:22]})*(2.0**-30.0), op?"MINUS":"PLUS", B[63]?"-1":"+1",$signed(B[62:52]-1023),$itor({1'b1,B[51:22]})*(2.0**-30.0), Z[63]?"-1":"+1",$signed(Z[62:52]-1023),$itor({1'b1,Z[51:22]})*(2.0**-30.0), Z);
+        $display("%f %s %f = %f", $bitstoreal(A), op?"-":"+", $bitstoreal(B), $bitstoreal(Z));
 
-        A=32'b00111111000000000000000000000000; //0.5
-        B=32'b00111111000000000000000000000000; //0.5
-        op=0;#1000;
-        $display("%s * 2^%-1d * %f  %s  %s * 2^%-1d * %f  =  %s * 2^%-1d * %f    %b", A[31]?"-1":"+1",$signed(A[30:23]-127),$itor({1'b1,A[22:0]})*(2.0**-23.0), op?"MINUS":"PLUS", B[31]?"-1":"+1",$signed(B[30:23]-127),$itor({1'b1,B[22:0]})*(2.0**-23.0), Z[31]?"-1":"+1",$signed(Z[30:23]-127),$itor({1'b1,Z[22:0]})*(2.0**-23.0), Z);
-        $display("%f %s %f = %f", (A[31]?-1:1)*2**(A[30:23]-127)*{1'b1,A[22:0]}*(2.0**-23.0),  op?"-":"+", $itor((B[31]?-1:1)*2**(B[30:23]-127)*{1'b1,B[22:0]})*(2.0**-23.0), $itor((Z[31]?-1:1)*2**(Z[30:23]-127)*{1'b1,Z[22:0]})*(2.0**-23.0));
+        // Sub same sign negative
+        A=$realtobits(-3);
+        B=$realtobits(-4);
+        op=1;#1000;
+        // $display();
+        // $display("%s * 2^%-1d * %f  %s  %s * 2^%-1d * %f  =  %s * 2^%-1d * %f    %b", A[63]?"-1":"+1",$signed(A[62:52]-1023),$itor({1'b1,A[51:22]})*(2.0**-30.0), op?"MINUS":"PLUS", B[63]?"-1":"+1",$signed(B[62:52]-1023),$itor({1'b1,B[51:22]})*(2.0**-30.0), Z[63]?"-1":"+1",$signed(Z[62:52]-1023),$itor({1'b1,Z[51:22]})*(2.0**-30.0), Z);
+        $display("%f %s %f = %f", $bitstoreal(A), op?"-":"+", $bitstoreal(B), $bitstoreal(Z));
+
+        // Sub negative first, result positive
+        A=$realtobits(-3);
+        B=$realtobits(4);
+        op=1;#1000;
+        // $display();
+        // $display("%s * 2^%-1d * %f  %s  %s * 2^%-1d * %f  =  %s * 2^%-1d * %f    %b", A[63]?"-1":"+1",$signed(A[62:52]-1023),$itor({1'b1,A[51:22]})*(2.0**-30.0), op?"MINUS":"PLUS", B[63]?"-1":"+1",$signed(B[62:52]-1023),$itor({1'b1,B[51:22]})*(2.0**-30.0), Z[63]?"-1":"+1",$signed(Z[62:52]-1023),$itor({1'b1,Z[51:22]})*(2.0**-30.0), Z);
+        $display("%f %s %f = %f", $bitstoreal(A), op?"-":"+", $bitstoreal(B), $bitstoreal(Z));
+
+        // Sub negative first, result negative
+        A=$realtobits(-4);
+        B=$realtobits(3);
+        op=1;#1000;
+        // $display();
+        // $display("%s * 2^%-1d * %f  %s  %s * 2^%-1d * %f  =  %s * 2^%-1d * %f    %b", A[63]?"-1":"+1",$signed(A[62:52]-1023),$itor({1'b1,A[51:22]})*(2.0**-30.0), op?"MINUS":"PLUS", B[63]?"-1":"+1",$signed(B[62:52]-1023),$itor({1'b1,B[51:22]})*(2.0**-30.0), Z[63]?"-1":"+1",$signed(Z[62:52]-1023),$itor({1'b1,Z[51:22]})*(2.0**-30.0), Z);
+        $display("%f %s %f = %f", $bitstoreal(A), op?"-":"+", $bitstoreal(B), $bitstoreal(Z));
+
+        // Sub negative second, result positive
+        A=$realtobits(4);
+        B=$realtobits(-3);
+        op=1;#1000;
+        // $display();
+        // $display("%s * 2^%-1d * %f  %s  %s * 2^%-1d * %f  =  %s * 2^%-1d * %f    %b", A[63]?"-1":"+1",$signed(A[62:52]-1023),$itor({1'b1,A[51:22]})*(2.0**-30.0), op?"MINUS":"PLUS", B[63]?"-1":"+1",$signed(B[62:52]-1023),$itor({1'b1,B[51:22]})*(2.0**-30.0), Z[63]?"-1":"+1",$signed(Z[62:52]-1023),$itor({1'b1,Z[51:22]})*(2.0**-30.0), Z);
+        $display("%f %s %f = %f", $bitstoreal(A), op?"-":"+", $bitstoreal(B), $bitstoreal(Z));
+
+        // Sub negative second, result negative
+        A=$realtobits(3);
+        B=$realtobits(-4);
+        op=1;#1000;
+        // $display();
+        // $display("%s * 2^%-1d * %f  %s  %s * 2^%-1d * %f  =  %s * 2^%-1d * %f    %b", A[63]?"-1":"+1",$signed(A[62:52]-1023),$itor({1'b1,A[51:22]})*(2.0**-30.0), op?"MINUS":"PLUS", B[63]?"-1":"+1",$signed(B[62:52]-1023),$itor({1'b1,B[51:22]})*(2.0**-30.0), Z[63]?"-1":"+1",$signed(Z[62:52]-1023),$itor({1'b1,Z[51:22]})*(2.0**-30.0), Z);
+        $display("%f %s %f = %f", $bitstoreal(A), op?"-":"+", $bitstoreal(B), $bitstoreal(Z));
 
         $dumpflush;
     end
 
 endmodule
-

@@ -3,12 +3,12 @@
 
 module testDiff();
     
-    reg [7:0] A;
-    reg [7:0] B;
+    reg [10:0] A;
+    reg [10:0] B;
 
     wire slt;
     wire ovfl;
-    wire [7:0] diff;
+    wire [10:0] diff;
 
     expDiff diff0(diff, slt, ovfl, A, B);
 

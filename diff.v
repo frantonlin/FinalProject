@@ -3,19 +3,19 @@
 
 module expDiff
 (
-    output [7:0] diff,
+    output [10:0] diff,
     output slt,
     output ovfl,
-    input [7:0] A,
-    input [7:0] B
+    input [10:0] A,
+    input [10:0] B
 );
-    wire [7:0] A, B;
+    wire [10:0] A, B;
     wire cout;
-    wire signed [7:0] sub;
+    wire signed [10:0] sub;
     assign {cout, sub} = A - B;
-    assign slt = sub[7];
+    assign slt = sub[10];
 
-    mux8bit mux(diff, slt, sub, ~sub+8'b1);
+    mux11bit mux(diff, slt, sub, ~sub+11'b1);
     xor (ovfl, slt, cout);
 
 endmodule

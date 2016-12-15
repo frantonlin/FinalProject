@@ -3,25 +3,25 @@
 
 module testMux();
     
-    reg signed [7:0] A8;
-    reg signed [7:0] B8;
-    wire signed [7:0] out8;
+    reg signed [10:0] A11;
+    reg signed [10:0] B11;
+    wire signed [10:0] out11;
 
-    reg signed [23:0] A24;
-    reg signed [23:0] B24;
-    wire signed [23:0] out24;
+    reg signed [52:0] A53;
+    reg signed [52:0] B53;
+    wire signed [52:0] out53;
 
     reg sel;
 
-    mux8bit mux8(out8, sel, A8, B8);
-    mux24bit mux24(out24, sel, A24, B24);
+    mux11bit mux11(out11, sel, A11, B11);
+    mux53bit mux53(out53, sel, A53, B53);
 
     initial begin
-        $display("A    B    sel | out8  out24");
-        A8=-8'd2;B8=8'd3;A24=-24'd2;B24=24'd3;sel=0; #1000;
-        $display("%-3d  %-3d  %b   | %-3d   %-3d", A8, B8, sel, out8, out24);
-        A8=-8'd2;B8=8'd3;A24=-24'd2;B24=24'd3;sel=1; #1000;
-        $display("%-3d  %-3d  %b   | %-3d   %-3d", A8, B8, sel, out8, out24);
+        $display("A    B    sel | out11  out53");
+        A11=-11'd2;B11=11'd3;A53=-53'd2;B53=53'd3;sel=0; #1000;
+        $display("%-3d  %-3d  %b   | %-3d   %-3d", A11, B11, sel, out11, out53);
+        A11=-11'd2;B11=11'd3;A53=-53'd2;B53=53'd3;sel=1; #1000;
+        $display("%-3d  %-3d  %b   | %-3d   %-3d", A11, B11, sel, out11, out53);
     end
 
 endmodule
