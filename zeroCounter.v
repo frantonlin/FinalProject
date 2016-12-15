@@ -11,8 +11,6 @@ module zeroCounter
     wire [7:0] val8;
     wire [3:0] val4;
 
-    // assign val32 = {value, {8{1'b1}}};
-
     assign numZeroes[5] = (value[63:32] == 32'b0);
     assign val32 = numZeroes[5] ? value[31:0] : value[63:32];
     assign numZeroes[4] = (val32[31:16] == 16'b0);

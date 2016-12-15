@@ -1,12 +1,12 @@
 // 32-bit Floating Point Add/Sub
 // // op: 0=>add, 1=>sub
 
-`include "diff.v"
+// `include "diff.v"
 // `include "mux.v"
-`include "shift.v"
-`include "adder.v"
-`include "sign.v"
-`include "zeroCounter.v"
+// `include "shift.v"
+// `include "adder.v"
+// `include "sign.v"
+// `include "zeroCounter.v"
 
 module fpuAdder
 (

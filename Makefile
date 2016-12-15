@@ -2,7 +2,7 @@ CC=iverilog
 OUT=run.out
 
 all:
-	echo "make {slt, diff, mux, shift, adder, sign, zero, fpuAdder}"
+	echo "make {slt, diff, mux, shift, adder, sign, zero, fpuAdder, testAll}"
 
 slt: slt.v slt.t.v
 	$(CC) -o $(OUT) slt.t.v && ./$(OUT)
@@ -27,6 +27,9 @@ zero: zeroCounter.v zeroCounter.t.v
 
 fpuAdder: fpuAdder.v fpuAdder.t.v
 	$(CC) -o $(OUT) fpuAdder.t.v && ./$(OUT)
+
+testAll: testAll.v
+	$(CC) -o $(OUT) testAll.v && ./$(OUT)
 
 clean:
 	rm -r $(OUT)

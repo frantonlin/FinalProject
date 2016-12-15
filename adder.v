@@ -6,7 +6,7 @@ module adder
 (
     output [52:0] res,
     output sign,
-    output cout,
+    output ovfl,
     input op,
     input [52:0] A,
     input [52:0] B
@@ -17,7 +17,7 @@ module adder
     reg signed [53:0] signedRes;
     reg signedCout;
     
-    assign sign = signedRes[53] & ~cout;
+    assign sign = signedRes[53] & ~ovfl;
 
     always @(op or A or B) begin
         if (!op) begin
@@ -28,7 +28,7 @@ module adder
         // $display("%b",signedRes);
     end
 
-    xor (cout, signedRes[53], signedCout);
+    xor (ovfl, signedRes[53], signedCout);
     mux53bit mux(res, sign, signedRes[52:0], ~signedRes[52:0]+53'b1);
 
 endmodule

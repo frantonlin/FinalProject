@@ -7,8 +7,8 @@ module rightShift53bit
     input [10:0] shiftAmt,
     input [52:0] in
 );
-    wire signed [10:0] shiftAmt;
-    wire signed [52:0] in;
+    wire [10:0] shiftAmt;
+    wire [52:0] in;
     
     assign res = in >> shiftAmt;
 
@@ -21,8 +21,8 @@ module leftShift53bit
     input [10:0] shiftAmt,
     input [52:0] in
 );
-    wire signed [10:0] shiftAmt;
-    wire signed [52:0] in;
+    wire [10:0] shiftAmt;
+    wire [52:0] in;
     
     assign res = in << shiftAmt;
     

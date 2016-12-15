@@ -20,17 +20,7 @@ module signComputer
     // ADD diff  -> sub x by A sign
     // SUB equal -> sub x by A/B sign
     // SUB diff  -> add x by A sign
-
     
     assign sign = ~A&eop&esign | A&~eop | A&eop&~esign;
-
-
-    // always @(flop or A or B) begin
-    //     if (!subtract) begin
-    //         out <= A + B;
-    //     end else begin
-    //         out <= A - B;
-    //     end
-    // end
 
 endmodule

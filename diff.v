@@ -1,5 +1,5 @@
 // 8-bit Exponent Difference
-`include "mux.v"
+// `include "mux.v"
 
 module expDiff
 (
