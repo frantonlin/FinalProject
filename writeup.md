@@ -5,7 +5,7 @@ I implemented a double precision floating point adder/subtractor using Verilog. 
 
 I attempted to implement this as structurally as possible, but ran out of time before making it fully structural. However, the structure of the implementation along with the testing suite would make it fairly easy to swap out behavioral components for structural components. For example, the left and right shifters in the block diagram could be swapped out with a barrel shifter implementation. Structural implementation is interesting, as hardware FPUs are much faster than software FPUs.
 
-Additionally, I did not implement rounding modes or deal with overflow during exponent difference calculation. The focus of this project was to understand and implement basic floating point arithmetic, as floating arithmetic is used often for real world applications (e.g. calculating Avogadro's number).
+Additionally, I did not implement rounding modes or deal with overflow during exponent difference calculation. The focus of this project was to understand and implement basic floating point arithmetic, as floating arithmetic is used often for real world applications (e.g. calculating Avogadro's number). Although I only completed a small portion of what the project was originally scoped to, I learned a lot from the implementation and difficulties involved with a floating point adder/subtractor.
 
 ## Block Diagram
 <img src="blockdiagram.png" alt="FPU Add/Sub Block Diagram">
@@ -17,6 +17,9 @@ Although not explicitly displayed in the diagram above, the normalization blocks
 
 ## Testing
 A comprehensive test suite was created, which tests all of the blocks of the implementation and automatically checks that the output is correct. Given that the tests do not pass, some additional information may be displayed. Furthermore, each test also contains commented out $display statements that display a verbose output of the testing.
+
+## Running This Implementation
+To run this code, you will need [Icarus Verilog](http://iverilog.icarus.com/). Additionally, [GTKWave](http://gtkwave.sourceforge.net/) is extremely useful for debugging. Using the included Makefile, you can run `make testAll` to run the self-checking tests on all of the modules.
 
 ## Resources
 - http://steve.hollasch.net/cgindex/coding/ieeefloat.html
